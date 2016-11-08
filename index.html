@@ -30,9 +30,9 @@
       }
 
       socket.on('chat message', function(payload){
-        var node = document.createElement("li");                 // Create a <li> node
-        var text = document.createTextNode(payload.nickname + ': ' + payload.message);         // Create a text node
-        node.appendChild(text);                              // Append the text to <li>
+        var node = document.createElement("li");
+        var text = document.createTextNode(payload.nickname + ': ' + payload.message);
+        node.appendChild(text);
         document.getElementById('messages').appendChild(node);
       });
 
