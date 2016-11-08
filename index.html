@@ -25,6 +25,13 @@
         }
       }
 
+      socket.on('chat message', function(msg){
+        var node = document.createElement("li");                 // Create a <li> node
+        var text = document.createTextNode(msg);         // Create a text node
+        node.appendChild(text);                              // Append the text to <li>
+        document.getElementById('messages').appendChild(node);
+      });
+
     </script>
   </head>
   <body>
