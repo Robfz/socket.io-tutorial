@@ -18,16 +18,18 @@
       var socket = io();
 
       var sendMessage = function () {
-        var message = document.getElementById('m').value;
+        var message = document.getElementById('message').value;
+        var nickname = document.getElementById('nickname').value;
         if (message) {
-          console.debug('About to send ', message);
-          socket.emit('chat message', message);
+          var payload = { 'message': message, 'nickname': nickname };
+          console.debug('About to send ', payload);
+          socket.emit('chat message', payload);
         }
       }
 
-      socket.on('chat message', function(msg){
+      socket.on('chat message', function(payload){
         var node = document.createElement("li");                 // Create a <li> node
-        var text = document.createTextNode(msg);         // Create a text node
+        var text = document.createTextNode(payload.nickname + ': ' + payload.message);         // Create a text node
         node.appendChild(text);                              // Append the text to <li>
         document.getElementById('messages').appendChild(node);
       });
@@ -35,9 +37,12 @@
     </script>
   </head>
   <body>
+    <div>
+      Nickname <input type="text" id="nickname">
+    </div>
     <ul id="messages"></ul>
     <form action="javascript:sendMessage()">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="message" autocomplete="off" /><button>Send</button>
     </form>
   </body>
 </html>
