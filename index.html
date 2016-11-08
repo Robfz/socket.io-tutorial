@@ -11,6 +11,7 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
+      .nickname-container { background-color: #000000; color: rgb(130, 224, 255); padding: 5px }
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -20,10 +21,11 @@
       var sendMessage = function () {
         var message = document.getElementById('message').value;
         var nickname = document.getElementById('nickname').value;
-        if (message) {
+        if (message && nickname) {
           var payload = { 'message': message, 'nickname': nickname };
           console.debug('About to send ', payload);
           socket.emit('chat message', payload);
+          document.getElementById('message').value = '';
         }
       }
 
@@ -37,8 +39,8 @@
     </script>
   </head>
   <body>
-    <div>
-      Nickname <input type="text" id="nickname">
+    <div class="nickname-container">
+      Nickname <input style="" type="text" id="nickname">
     </div>
     <ul id="messages"></ul>
     <form action="javascript:sendMessage()">
